@@ -2,11 +2,41 @@ import Header from './components/header'
 
 import initialEmails from './data/emails'
 
+import React, {useState} from 'react';
+
 import './styles/app.css'
 
 function App() {
   // Use initialEmails for state
   console.log(initialEmails)
+
+  const [emails, setEmails] = useState(initialEmails)
+
+  const createEmailList = () => {
+    return (
+      <ul className="email-list">
+        {emails.map(email => 
+          <li className="email" key={email.id}>
+              <div className="select">
+                <input
+                  className="select-checkbox"
+                  type="checkbox"
+                  value={email.read}
+                />
+              </div>
+              <div className="star">
+                <input
+                  className="star-checkbox"
+                  type="checkbox"
+                  value={email.starred}
+                />
+              </div>
+              <div className="sender">{email.sender}</div>
+              <div className="title">{email.title}</div>
+          </li>)}
+      </ul>
+    )
+  }
 
   return (
     <div className="app">
@@ -39,7 +69,11 @@ function App() {
           </li>
         </ul>
       </nav>
-      <main className="emails">{/* Render a list of emails here */}</main>
+      <main className="emails">
+        <ul>
+          {createEmailList()}
+        </ul>
+      </main>
     </div>
   )
 }
