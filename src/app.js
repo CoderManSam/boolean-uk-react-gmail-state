@@ -16,7 +16,7 @@ function App() {
     return (
       <ul className="email-list">
         {emails.map(email => 
-          <li className="email" key={email.id}>
+          <li className={`email ${email.read ? 'read' : 'unread'}`} key={email.id}>
               <div className="select">
                 <input
                   className="select-checkbox"
@@ -28,7 +28,6 @@ function App() {
                 <input
                   className="star-checkbox"
                   type="checkbox"
-                  value={email.starred}
                 />
               </div>
               <div className="sender">{email.sender}</div>
@@ -71,6 +70,7 @@ function App() {
       </nav>
       <main className="emails">
         <ul>
+          {/* remove this ul as the function returns a ul */}
           {createEmailList()}
         </ul>
       </main>
